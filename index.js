@@ -8,10 +8,10 @@ app.use(express.json());
 
 
 //pull in schema for Emma's poops
-const EP = require("ep");
+const EP = require("./ep");
 
 // pull in mongo database
-const mongodb = require("mongo");
+const mongodb = require("./model");
 
 // command line flags
 const flags = require("flags");
@@ -23,6 +23,16 @@ require("dotenv");
 
 // set port hierarcy
 const port =  flags.get("port") || process.env.PORT || 4000;
+
+// start mongodb server
+mongodb.setUpConnectionHandlers(() => {
+    app.listen(port, () => {
+        console.log(`server is running on port ${port}`);
+    });
+});
+mongodb.connect();
+
+
 
 
 
