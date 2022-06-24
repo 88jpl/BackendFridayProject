@@ -13,6 +13,19 @@ const EP = require("ep");
 // pull in mongo database
 const mongodb = require("mongo");
 
+// command line flags
+const flags = require("flags");
+flags.defineNumber("port", 8888, "listen port for the http server");
+flags.parse();
+
+// pull in dotenv
+require("dotenv");
+
+// set port hierarcy
+const port =  flags.get("port") || process.env.PORT || 4000;
+
+
+
 
 
 
