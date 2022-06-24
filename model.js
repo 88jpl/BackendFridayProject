@@ -4,10 +4,16 @@ const mongoose = require("mongoose");
 // rename mongoose connection to something shorter
 const db = mongoose.connection;
 
+// pull in dotenv
+require("dotenv");
+
+//variables for connection string
+const login = process.env.MONGOLOGIN;
+const pass = process.env.MONGOPASS;
 
 
 function connect(user, password, host, port, db) {
-    const connectionString = 'mongodb+srv://codeschool:codeschool@cluster0.lok4hkl.mongodb.net/?retryWrites=true&w=majority';
+    const connectionString = `mongodb+srv://${login}:${pass}@cluster0.lok4hkl.mongodb.net/?retryWrites=true&w=majority`;
 
     mongoose.connect(connectionString, {
         // backwards compatiable code always required
@@ -36,10 +42,7 @@ function setUpConnectionHandlers(callback) {
     });
     
 }
-// db.listen(8080, () => {
-//     console.log("listening at port 8080")
 
-// })
 
 
 
